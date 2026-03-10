@@ -1,71 +1,67 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{iztok}[2023/10/11 iztok CV class]
+\ProvidesClass{icv}[2026/03/07 Academic CV class]
 
-% Base class
-\LoadClass[onecolumn]{article}
+\LoadClass[10pt,onecolumn]{article}
 
-% Colors + options
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
 \RequirePackage{xcolor}
-\definecolor{slcolor}{HTML}{882B21}
-\definecolor{slcolor1}{HTML}{0080FF}
+\RequirePackage{geometry}
+\RequirePackage{enumitem}
+\RequirePackage{hyperref}
+\RequirePackage{fontawesome5}
+\RequirePackage{scalerel}
+\RequirePackage{tikz}
+\RequirePackage{array}
+\usetikzlibrary{svg.path}
 
-\newcommand{\headlinecolor}{\normalcolor}
-\DeclareOption{green}{\renewcommand{\headlinecolor}{\color{green}}}
-\DeclareOption{red}{\renewcommand{\headlinecolor}{\color{slcolor}}}
-\DeclareOption{blue}{\renewcommand{\headlinecolor}{\color{slcolor1}}}
+\definecolor{slred}{HTML}{882B21}
+\definecolor{slblue}{HTML}{0080FF}
+\definecolor{slgreen}{HTML}{2F6B3B}
+\colorlet{accent}{slred}
 
-% Pass unknown
+\newif\ifcvslovene
+\cvslovenefalse
+
+\DeclareOption{red}{\colorlet{accent}{slred}}
+\DeclareOption{blue}{\colorlet{accent}{slblue}}
+\DeclareOption{green}{\colorlet{accent}{slgreen}}
+\DeclareOption{slovene}{\cvslovenetrue}
+\DeclareOption{english}{\cvslovenefalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
-% Page layout
-\RequirePackage[
-  margin=2cm
-]{geometry}
+\geometry{top=1.55cm,bottom=1.8cm,left=1.8cm,right=1.8cm}
+\definecolor{cvtextgray}{HTML}{4A4A4A}
+\definecolor{rulegray}{HTML}{D8D8D8}
 
-% Links (needed by \orcidicon)
-\PassOptionsToPackage{hyphens}{url}
-\RequirePackage[colorlinks=false]{hyperref}
-
-\AtBeginDocument{%
-  \fontsize{9}{10}\selectfont
+\hypersetup{
+  colorlinks=true,
+  urlcolor=accent,
+  linkcolor=accent
 }
 
-% ---- Internal redefinitions that use @-macros ----
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.25em}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.15em,topsep=0.2em,parsep=0pt,partopsep=0pt}
+\AtBeginDocument{\fontsize{10}{12}\selectfont}
+
 \makeatletter
-
-% Title (two-column body after a full-width headline - TODO)
-\renewcommand{\maketitle}{%
-  \twocolumn[%
-    \thispagestyle{empty}%
-    \vspace*{-0.5\baselineskip}%
-    {\fontsize{50}{60}\fontfamily{phv}\fontseries{b}\fontshape{sl}\selectfont
-      \headlinecolor \@title\par}%
-    \medskip
-  ]%
-}
-
-% Section styling
-\renewcommand{\section}{%
-  \@startsection
-    {section}{1}{0pt}%
-    {-1.5ex plus -1ex minus -.2ex}%
-    {1ex plus .2ex}%
-    {\large\sffamily\slshape\headlinecolor}%
-}
-\setcounter{secnumdepth}{0}
-
+\newcommand{\cvtitletext}{\@title}
+\newcommand{\cvtaglinetext}{}
+\newcommand{\cvcontacttext}{}
+\newcommand{\tagline}[1]{\gdef\cvtaglinetext{#1}}
+\newcommand{\contactinfo}[1]{\gdef\cvcontacttext{#1}}
 \makeatother
 
-\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
-\let\endchangemargin=\endlist
+\newcommand{\contactsep}{\enspace{\color{accent}\textbar}\enspace}
+\newcommand{\emaillink}[1]{\href{mailto:#1}{\faIcon{envelope}\enspace #1}}
+\newcommand{\phonelink}[1]{\href{tel:#1}{\faIcon{phone}\enspace #1}}
+\newcommand{\weblink}[2]{\href{#1}{\faIcon{globe}\enspace #2}}
+\newcommand{\githublink}[2]{\href{#1}{\faIcon{github}\enspace #2}}
+\newcommand{\codeberglink}[2]{\href{#1}{\faIcon{code}\enspace #2}}
+\newcommand{\locationtext}[1]{\faIcon{map-marker-alt}\enspace #1}
 
-% ====== Identifiers / ORCID ======
-\RequirePackage{scalerel}
-\RequirePackage{tikz}
-\usetikzlibrary{svg.path}
-
-% reference: https://tex.stackexchange.com/questions/533939/ifacconf-how-to-include-orcid-in-latex
 \definecolor{orcidlogocol}{HTML}{A6CE39}
 \tikzset{
   orcidlogo/.pic={
@@ -75,14 +71,66 @@
                  svg{M88.7,56.8c0,5.5-4.5,10.1-10.1,10.1c-5.6,0-10.1-4.6-10.1-10.1c0-5.6,4.5-10.1,10.1-10.1C84.2,46.7,88.7,51.3,88.7,56.8z};
   }
 }
-
 \DeclareRobustCommand{\orcidicon}[1]{%
   \href{https://orcid.org/#1}{%
     \mbox{\scalerel*{%
       \begin{tikzpicture}[yscale=-1,transform shape]
         \pic{orcidlogo};
       \end{tikzpicture}
-    }{|}}%
+    }{|}}\enspace #1%
   }%
 }
 
+\newcommand{\makecvheader}{%
+  \thispagestyle{empty}%
+  \noindent
+  {\fontsize{34}{36}\selectfont\sffamily\bfseries\color{accent}\cvtitletext\par}%
+  \vspace{0.22em}
+  {\large\sffamily\color{cvtextgray}\cvtaglinetext\par}%
+  \vspace{0.55em}
+  {\color{rulegray}\rule{\textwidth}{0.5pt}\par}%
+  \vspace{0.35em}
+  \begin{center}
+    \small\color{cvtextgray}
+    \cvcontacttext
+  \end{center}
+  \vspace{-0.15em}
+  {\color{rulegray}\rule{\textwidth}{0.5pt}\par}%
+  \vspace{0.85em}
+}
+\renewcommand{\maketitle}{\makecvheader}
+
+\newcommand{\cvsection}[1]{%
+  \vspace{0.75em}
+  {\large\sffamily\bfseries\color{accent} #1}\par
+  \vspace{0.15em}
+  {\color{rulegray}\rule{\textwidth}{0.45pt}}\par
+  \vspace{0.35em}
+}
+
+\newlength{\cvleftcolwidth}
+\setlength{\cvleftcolwidth}{0.16\textwidth}
+\newlength{\cvrightcolwidth}
+\setlength{\cvrightcolwidth}{\dimexpr\textwidth-\cvleftcolwidth-1.1em\relax}
+
+\newcolumntype{L}{>{\raggedleft\arraybackslash\small\sffamily\color{cvtextgray}}p{\cvleftcolwidth}}
+\newcolumntype{R}{>{\arraybackslash}p{\cvrightcolwidth}}
+
+\newcommand{\cventry}[5]{%
+  \noindent
+  \begin{tabular*}{\textwidth}{@{}L@{\hspace{1.1em}}R@{}}
+    \vspace{0pt}#1 & \vspace{0pt}\textbf{#2}\hfill{\small\sffamily #3}\par{\emph{#4}}\par #5
+  \end{tabular*}
+  \par\vspace{0.55em}
+}
+
+\newcommand{\cvitem}[2]{%
+  \noindent
+  \begin{tabular*}{\textwidth}{@{}L@{\hspace{1.1em}}R@{}}
+    \vspace{0pt}#1 & \vspace{0pt}#2
+  \end{tabular*}
+  \par\vspace{0.28em}
+}
+
+\newcommand{\cvaward}[2]{\cvitem{#1}{\textbf{#2}}}
+\newcommand{\cvmetric}[2]{\cvitem{#1}{#2}}
