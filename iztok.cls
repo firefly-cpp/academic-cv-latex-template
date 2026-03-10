@@ -147,3 +147,6 @@
 
 \newcommand{\cvaward}[2]{\cvitem{#1}{\textbf{#2}}}
 \newcommand{\cvmetric}[2]{\cvitem{#1}{#2}}
+
+% for clickable DOI in publications
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
