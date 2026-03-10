@@ -1,3 +1,16 @@
+% ------------------------------------------------
+% iztok.cls — Academic CV class in LaTeX
+% ------------------------------------------------
+%
+% Source:
+%   https://codeberg.org/firefly-cpp/academic-cv-latex-template
+%
+% License:
+%   European Union Public License (EUPL) v1.2
+%
+% Copyright (c) 2026 Iztok Fister, Jr.
+%
+% ------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{icv}[2026/03/07 Academic CV class]
 
