@@ -150,3 +150,9 @@
 
 % for clickable DOI in publications
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
+
+% helper macro for repo
+\newcommand{\repo}[2]{\href{#1}{\texttt{#2}}}
+
+% helper macro for website - e.g. text from website
+\newcommand{\web}[2]{\href{#1}{#2}}
