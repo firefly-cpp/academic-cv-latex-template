@@ -44,7 +44,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 
-\geometry{top=1.55cm,bottom=1.8cm,left=1.8cm,right=1.8cm}
+\geometry{top=1.45cm,bottom=1.7cm,left=1.8cm,right=1.8cm}
 \definecolor{cvtextgray}{HTML}{4A4A4A}
 \definecolor{rulegray}{HTML}{D8D8D8}
 
@@ -55,9 +55,9 @@
 }
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.25em}
-\setlist[itemize]{leftmargin=1.2em,itemsep=0.15em,topsep=0.2em,parsep=0pt,partopsep=0pt}
-\AtBeginDocument{\fontsize{10}{12}\selectfont}
+\setlength{\parskip}{0.06em}
+\setlist[itemize]{leftmargin=1.15em,itemsep=0.03em,topsep=0.03em,parsep=0pt,partopsep=0pt}
+\AtBeginDocument{\fontsize{10}{11.5}\selectfont}
 
 \makeatletter
 \newcommand{\cvtitletext}{\@title}
@@ -97,52 +97,74 @@
 \newcommand{\makecvheader}{%
   \thispagestyle{empty}%
   \noindent
-  {\fontsize{34}{36}\selectfont\sffamily\bfseries\color{accent}\cvtitletext\par}%
-  \vspace{0.22em}
-  {\large\sffamily\color{cvtextgray}\cvtaglinetext\par}%
-  \vspace{0.55em}
-  {\color{rulegray}\rule{\textwidth}{0.5pt}\par}%
-  \vspace{0.35em}
+  {\fontsize{30}{32}\selectfont\sffamily\bfseries\color{accent}\cvtitletext\par}%
+  \vspace{0.06em}
+  {\normalsize\sffamily\color{cvtextgray}\cvtaglinetext\par}%
+  \vspace{0.18em}
+  {\color{rulegray}\rule{\textwidth}{0.45pt}\par}%
+  \vspace{0.10em}
   \begin{center}
     \small\color{cvtextgray}
     \cvcontacttext
   \end{center}
-  \vspace{-0.15em}
-  {\color{rulegray}\rule{\textwidth}{0.5pt}\par}%
-  \vspace{0.85em}
+  \vspace{-0.38em}
+  {\color{rulegray}\rule{\textwidth}{0.45pt}\par}%
+  \vspace{0.28em}
 }
 \renewcommand{\maketitle}{\makecvheader}
 
 \newcommand{\cvsection}[1]{%
-  \vspace{0.75em}
+  \vspace{0.28em}
   {\large\sffamily\bfseries\color{accent} #1}\par
-  \vspace{0.15em}
-  {\color{rulegray}\rule{\textwidth}{0.45pt}}\par
-  \vspace{0.35em}
+  \vspace{0.04em}
+  {\color{rulegray}\rule{\textwidth}{0.40pt}}\par
+  \vspace{0.10em}
 }
 
 \newlength{\cvleftcolwidth}
 \setlength{\cvleftcolwidth}{0.16\textwidth}
 \newlength{\cvrightcolwidth}
-\setlength{\cvrightcolwidth}{\dimexpr\textwidth-\cvleftcolwidth-1.1em\relax}
+\setlength{\cvrightcolwidth}{\dimexpr\textwidth-\cvleftcolwidth-1.0em\relax}
 
 \newcolumntype{L}{>{\raggedleft\arraybackslash\small\sffamily\color{cvtextgray}}p{\cvleftcolwidth}}
 \newcolumntype{R}{>{\arraybackslash}p{\cvrightcolwidth}}
 
 \newcommand{\cventry}[5]{%
   \noindent
-  \begin{tabular*}{\textwidth}{@{}L@{\hspace{1.1em}}R@{}}
-    \vspace{0pt}#1 & \vspace{0pt}\textbf{#2}\hfill{\small\sffamily #3}\par{\emph{#4}}\par #5
-  \end{tabular*}
-  \par\vspace{0.55em}
+  \parbox[t]{\cvleftcolwidth}{%
+    \vspace{0pt}%
+    \raggedleft\small\sffamily\color{cvtextgray}\strut #1%
+  }%
+  \hspace{1.0em}%
+  \parbox[t]{\cvrightcolwidth}{%
+    \vspace{0pt}%
+    \setlength{\parskip}{0pt}%
+    \raggedright
+    \strut\textbf{#2}\par
+    \vspace{-0.20em}%
+    \strut{\small\sffamily #3}\par
+    \vspace{-0.20em}%
+    \strut{\emph{#4}}\par
+    \vspace{-0.25em}%
+    #5%
+  }%
+  \par\vspace{0.04em}%
 }
 
 \newcommand{\cvitem}[2]{%
   \noindent
-  \begin{tabular*}{\textwidth}{@{}L@{\hspace{1.1em}}R@{}}
-    \vspace{0pt}#1 & \vspace{0pt}#2
-  \end{tabular*}
-  \par\vspace{0.28em}
+  \parbox[t]{\cvleftcolwidth}{%
+    \vspace{0pt}%
+    \raggedleft\small\sffamily\color{cvtextgray}\strut #1%
+  }%
+  \hspace{1.0em}%
+  \parbox[t]{\cvrightcolwidth}{%
+    \vspace{0pt}%
+    \setlength{\parskip}{0pt}%
+    \raggedright
+    \strut #2%
+  }%
+  \par\vspace{0.05em}%
 }
 
 \newcommand{\cvaward}[2]{\cvitem{#1}{\textbf{#2}}}
