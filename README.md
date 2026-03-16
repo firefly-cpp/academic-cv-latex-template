@@ -1,12 +1,19 @@
-# icv – Academic CV LaTeX Class
+<h1 align="center">
+    icv – Academic CV LaTeX Class
+</h1>
+
+<p align="center">
+    <a href="#features">🚀 Features</a> •
+    <a href="#example-sections">📑 Example Sections</a> •
+    <a href="#related-templates-tools">🔗 Related templates & tools</a> •
+    <a href="#license">🔑 License</a>
+</p>
 
 **icv** is a lightweight LaTeX class for creating clean and structured academic CVs
 
 The class focuses on readability, structured sections, and easy customization.
 
----
-
-## Features
+## 🚀 Features
 
 - clean academic CV layout
 - structured sections for research CVs
@@ -16,9 +23,7 @@ The class focuses on readability, structured sections, and easy customization.
 - clickable links (DOI, websites, ORCID)
 - easy to extend and customize
 
----
-
-## Example Sections
+## 📑 Example Sections
 
 The template supports common academic CV sections such as:
 
@@ -38,7 +43,7 @@ The template supports common academic CV sections such as:
 - Open Source Contributions
 - Outreach and Science Communication
 
-## 🔗 Related templates/tools
+## 🔗 Related templates & tools
 
 - [A cover letter template for a journal paper submission in LaTex](https://github.com/firefly-cpp/cover-letter-latex)
 
