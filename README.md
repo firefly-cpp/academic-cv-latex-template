@@ -3,10 +3,10 @@
 </h1>
 
 <p align="center">
-    <a href="#-features">🚀 Features</a> •
-    <a href="#-example-sections">📑 Example Sections</a> •
-    <a href="#-related-templates--tools">🔗 Related templates & tools</a> •
-    <a href="#-license">🔑 License</a>
+    <a href="#features">🚀 Features</a> •
+    <a href="#example-sections">📑 Example Sections</a> •
+    <a href="#related-templates--tools">🔗 Related templates & tools</a> •
+    <a href="#license">🔑 License</a>
 </p>
 
 **icv** is a lightweight LaTeX class for creating clean and structured academic CVs
