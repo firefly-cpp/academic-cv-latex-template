@@ -5,7 +5,7 @@
 <p align="center">
     <a href="#features">🚀 Features</a> •
     <a href="#example-sections">📑 Example Sections</a> •
-    <a href="#related-templates--tools">🔗 Related templates & tools</a> •
+    <a href="#related-templates-tools">🔗 Related templates & tools</a> •
     <a href="#license">🔑 License</a>
 </p>
 
