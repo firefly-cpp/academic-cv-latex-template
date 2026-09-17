@@ -21,7 +21,9 @@
 \RequirePackage{xcolor}
 \RequirePackage{geometry}
 \RequirePackage{enumitem}
+\RequirePackage{needspace}
 \RequirePackage{hyperref}
+\RequirePackage{doi}
 \RequirePackage{fontawesome5}
 \RequirePackage{scalerel}
 \RequirePackage{tikz}
@@ -114,6 +116,7 @@
 \renewcommand{\maketitle}{\makecvheader}
 
 \newcommand{\cvsection}[1]{%
+  \Needspace{8\baselineskip}%
   \vspace{0.28em}
   {\large\sffamily\bfseries\color{accent} #1}\par
   \vspace{0.04em}
@@ -129,49 +132,49 @@
 \newcolumntype{L}{>{\raggedleft\arraybackslash\small\sffamily\color{cvtextgray}}p{\cvleftcolwidth}}
 \newcolumntype{R}{>{\arraybackslash}p{\cvrightcolwidth}}
 
-\newcommand{\cventry}[5]{%
-  \noindent
-  \parbox[t]{\cvleftcolwidth}{%
-    \vspace{0pt}%
-    \raggedleft\small\sffamily\color{cvtextgray}\strut #1%
-  }%
-  \hspace{1.0em}%
-  \parbox[t]{\cvrightcolwidth}{%
-    \vspace{0pt}%
-    \setlength{\parskip}{0pt}%
-    \raggedright
-    \strut\textbf{#2}\par
-    \vspace{-0.20em}%
-    \strut{\small\sffamily #3}\par
-    \vspace{-0.20em}%
-    \strut{\emph{#4}}\par
-    \vspace{-0.25em}%
-    #5%
-  }%
-  \par\vspace{0.04em}%
+\newenvironment{cvlayout}{%
+  \begin{description}[
+    leftmargin=\dimexpr\cvleftcolwidth+1.0em\relax,
+    labelwidth=\cvleftcolwidth,
+    labelsep=1.0em,
+    align=right,
+    nosep
+  ]
+}{%
+  \end{description}%
+}
+
+\NewDocumentCommand{\cventry}{m m m m +g}{%
+  \begin{cvlayout}
+    \item[{\normalfont\small\sffamily\color{cvtextgray}\strut #1}]%
+    \parbox[t]{\linewidth}{%
+      \setlength{\parskip}{0pt}%
+      \raggedright
+      \strut\textbf{#2}\par
+      \vspace{-0.20em}%
+      \strut{\small\sffamily #3}\par
+      \vspace{-0.20em}%
+      \strut{\emph{#4}}\par
+      \IfNoValueF{#5}{\vspace{-0.25em}#5}%
+    }%
+  \end{cvlayout}%
+  \vspace{0.04em}%
 }
 
 \newcommand{\cvitem}[2]{%
-  \noindent
-  \parbox[t]{\cvleftcolwidth}{%
-    \vspace{0pt}%
-    \raggedleft\small\sffamily\color{cvtextgray}\strut #1%
-  }%
-  \hspace{1.0em}%
-  \parbox[t]{\cvrightcolwidth}{%
-    \vspace{0pt}%
-    \setlength{\parskip}{0pt}%
-    \raggedright
-    \strut #2%
-  }%
-  \par\vspace{0.05em}%
+  \begin{cvlayout}
+    \item[{\normalfont\small\sffamily\color{cvtextgray}\strut #1}]%
+    \parbox[t]{\linewidth}{%
+      \setlength{\parskip}{0pt}%
+      \raggedright
+      \strut #2%
+    }%
+  \end{cvlayout}%
+  \vspace{0.05em}%
 }
 
 \newcommand{\cvaward}[2]{\cvitem{#1}{\textbf{#2}}}
 \newcommand{\cvmetric}[2]{\cvitem{#1}{#2}}
-
-% for clickable DOI in publications
-\newcommand{\doi}[1]{\href{https://doi.org/#1}{doi:#1}}
 
 % helper macro for repo
 \newcommand{\repo}[2]{\href{#1}{\texttt{#2}}}
